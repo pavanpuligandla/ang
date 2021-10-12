@@ -1,0 +1,113 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <strong>Create User</strong>
+        </div>
+        <form [formGroup]="createUsersForm" (ngSubmit)="onSubmit()">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="textarea-input">First Name</label>
+              <div class="col-md-9">
+                  <input type="text" class="form-control" placeholder="First Name" autocomplete="firstName" formControlName="firstName" [ngClass]="{'is-invalid':createUsersForm.get('firstName').touched && createUsersForm.get('firstName').invalid}">
+                  <div *ngIf="createUsersForm.get('firstName').touched && createUsersForm.get('firstName').invalid" class="invalid-feedback">
+                      <div *ngIf="createUsersForm.get('firstName').errors.required">User First Name is required</div>
+                      <div *ngIf="createUsersForm.get('firstName').errors.minlength">User First Name must be at least 6 characters</div>
+                      <div *ngIf="createUsersForm.get('firstName').errors.maxlength">User First Name max length</div>
+                    </div>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="textarea-input">Last Name</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Last Name" autocomplete="lastName" formControlName="lastName" [ngClass]="{'is-invalid':createUsersForm.get('lastName').touched && createUsersForm.get('lastName').invalid}">
+                    <div *ngIf="createUsersForm.get('lastName').touched && createUsersForm.get('lastName').invalid" class="invalid-feedback">
+                        <div *ngIf="createUsersForm.get('lastName').errors.required">User Last Name is required</div>
+                        <div *ngIf="createUsersForm.get('lastName').errors.minlength">User Last Name must be at least 6 characters</div>
+                        <div *ngIf="createUsersForm.get('lastName').errors.maxlength">User Last Name max length</div>
+                      </div>
+                </div>
+              </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="textarea-input">User Name</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" placeholder="Username" autocomplete="username" formControlName="userName" [ngClass]="{'is-invalid':createUsersForm.get('userName').touched && createUsersForm.get('userName').invalid}">
+                <div *ngIf="createUsersForm.get('userName').touched && createUsersForm.get('userName').invalid" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('userName').errors.required">User Name is required</div>
+                  <div *ngIf="createUsersForm.get('userName').errors.minlength">User Name must be at least 6 characters</div>
+                  <div *ngIf="createUsersForm.get('userName').errors.maxlength">User Name max length</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageType">Email Address</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" autocomplete="emailAddress" placeholder="Email address" formControlName="emailAddress"
+                  [ngClass]="{'is-invalid': createUsersForm.get('emailAddress').errors  && (createUsersForm.get('emailAddress').touched || createUsersForm.get('emailAddress').dirty)}">
+                <div *ngIf="createUsersForm.get('emailAddress').errors" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('emailAddress').errors.required">Email Address is required</div>
+                  <div *ngIf="createUsersForm.get('emailAddress').errors.pattern">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageDuration">Address1</label>
+              <div class="col-md-9">
+                <textarea placeholder="Address1" formControlName="address1" class="form-control" [ngClass]="{'is-invalid': createUsersForm.get('address1').errors  && (createUsersForm.get('address1').touched || createUsersForm.get('address1').dirty)}"></textarea>
+                <div *ngIf="createUsersForm.get('address1').errors" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('address1').errors.required">Address1 is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageDuration">Address2</label>
+              <div class="col-md-9">
+                <textarea placeholder="Address2" formControlName="address2" class="form-control" [ngClass]="{'is-invalid': createUsersForm.get('address2').errors  && (createUsersForm.get('address2').touched || createUsersForm.get('address2').dirty)}"></textarea>
+                <div *ngIf="createUsersForm.get('address2').touched && createUsersForm.get('address2').invalid" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('address2').errors.required">Address2 is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageDuration">Password</label>
+              <div class="col-md-9">
+                <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" formControlName="password"
+                  [ngClass]="{'is-invalid': createUsersForm.get('password').errors  && (createUsersForm.get('password').touched || createUsersForm.get('password').dirty)}">
+                <div *ngIf="createUsersForm.get('password').errors" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('password').errors.required">Password required</div>
+                  <div *ngIf="createUsersForm.get('password').errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageDuration">Confirm Password</label>
+              <div class="col-md-9">
+                <input type="password" class="form-control" placeholder="Confirm password" autocomplete="new-password" formControlName="confirmPassword"
+                  [ngClass]="{'is-invalid': createUsersForm.get('confirmPassword').errors  && (createUsersForm.get('confirmPassword').touched || createUsersForm.get('confirmPassword').dirty)}">
+                <div *ngIf="createUsersForm.get('confirmPassword').errors" class="invalid-feedback">
+                  <div *ngIf="createUsersForm.get('confirmPassword').errors.required">Confirm Password is required</div>
+                  <div *ngIf="createUsersForm.get('confirmPassword').errors.mustMatch">Passwords must match</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="messageDuration">Country</label>
+              <div class="col-md-9">
+                <select class="form-control">
+                          <option>-Select-</option>
+                          <option value="uk">UK</option>
+                          <option value="usa">USA</option>
+                          <option value="ind">IND</option>
+                      </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-success" type="submit"><i class="fa fa-dot-circle-o"></i> Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

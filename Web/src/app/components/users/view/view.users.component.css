@@ -1,0 +1,10 @@
+/* Styles go here */
+
+/* For screens above: 576px */
+.card{
+    overflow: hidden;
+  }
+  
+  .card-block{
+       word-wrap: break-word;
+  }

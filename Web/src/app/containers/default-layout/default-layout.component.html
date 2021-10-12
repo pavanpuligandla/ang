@@ -1,0 +1,65 @@
+<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.PNG', width: 150, height: 40, alt: 'test', text:'test'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.PNG', width: 150, height: 40, alt: 'test'}"
+  [sidebarToggler]="'lg'" [asideMenuToggler]=false>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+      </a>
+      <div class="text-right" *ngIf='firstName!==null'><span class="badge badge-light">Welcome {{firstName | titlecase}}
+          {{lastName | titlecase}} !</span></div>
+      <div><span class="badge badge-light">Last Login: {{lastLogin|date:'MM/dd/yyyy h:mm a'}}</span></div>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <i class="icon-bell"></i><span class="badge badge-pill badge-danger">{{messages.length}}</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg show" *dropdownMenu
+        aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>You have {{messages.length}} Messages</strong></div>
+        <div *ngFor="let message of messages">
+          <a class="dropdown-item" href="#">
+            <div class="text-truncate font-weight-bold"><span class="fa fa-exclamation text-danger">
+              </span> Important message</div>
+            <div class="small text-muted text-truncate">
+              {{message}}
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+          <img src="assets/img/avatars/1.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+            <div class="dropdown-header text-center"><strong>Settings</strong></div>
+            <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+            <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
+            <a class="dropdown-item" href="#/login"><i class="fa fa-lock"></i> Logout</a>
+        </div>
+      </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <main class="main">
+    <cui-breadcrumb>
+      <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        </div>
+      </li>
+    </cui-breadcrumb>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+<app-footer>
+  <span class="ml-auto">EPM - HEP &copy; 2019.</span>
+</app-footer>

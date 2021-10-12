@@ -1,0 +1,109 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> <strong>View Messages</strong>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Message</th>
+                <th>Message Type</th>
+                <th>Duration</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let message of messages; trackBy: trackByCode; let i = index'>
+                <td>{{message.MessageContent}}</td>
+                <td>{{message.MessageTypeId}}</td>
+                <td>{{message.MessageDurationId}}</td>
+                <td><button class="btn btn-warning" (click)="largeModal.show(); setClickedRow(i)">Update</button></td>
+                <td><button class="btn btn-danger">Delete</button></td>
+              </tr>
+              <tr *ngIf='!messages||messages.length==0'>
+                <td colspan="2">No messages to display</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Message</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <div class="animated fadeIn">
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="messagesForm" class="form-horizontal" (ngSubmit)="addMessage()">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="textarea-input">Message</label>
+                    <div class="col-md-9">
+                      <textarea rows="9" class="form-control" placeholder="Message..." formControlName="MessageContent" [ngClass]="{'is-invalid':messagesForm.get('MessageContent').touched && messagesForm.get('message').invalid}"></textarea>
+                      <div *ngIf="messagesForm.get('MessageContent').touched && messagesForm.get('MessageContent').invalid" class="invalid-feedback">
+                        <div *ngIf="messagesForm.get('MessageContent').errors.required">
+                          Message is required
+                        </div>
+                        <div *ngIf="messagesForm.get('MessageContent').errors.minlength">
+                          Message must be atleast 8 characters
+                        </div>
+                        <div *ngIf="messagesForm.get('MessageContent').errors.maxlength">
+                          Message can not be longer than 250 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="MessageTypeId">Message Type</label>
+                    <div class="col-md-9">
+                      <select class="form-control" formControlName="MessageTypeId" (change)="msgChange($event)">
+                        <option *ngFor="let messageType of messageType" [value]="messageType.Id">
+                          {{messageType.MessageType}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row" *ngIf="cmpType==2">
+                    <label class="col-md-3 col-form-label" for="CompanyID"> Company Name</label>
+                    <div class="col-md-9">
+                      <select class="form-control" formControlName="CompanyID">
+                        <option *ngFor="let companyType of companyType" [value]="companyType.Id">
+                          {{companyType.CompanyName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="MessageDurationId">Duration</label>
+                    <div class="col-md-9">
+                      <select class="form-control" formControlName="MessageDurationId">
+                        <option *ngFor="let messageDuration of messageDuration" [value]="messageDuration.Id">
+                          {{messageDuration.MessageDurationText}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!messagesForm.valid" type="submit">Save
+            changes</button>
+      </div>
+    </div>
+  </div>
+</div>

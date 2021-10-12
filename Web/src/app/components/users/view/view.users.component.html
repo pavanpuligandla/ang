@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> <strong>View Users</strong>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of userInfo">
+                <td>{{user.id}}</td>
+                <td>{{user.firstname}} </td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.emailaddress}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.country}}</td>
+                <td>
+                  <label class="switch switch-label switch-pill switch-outline-success-alt">
+                          <input checked="yes" class="switch-input" type="checkbox" [attr.checked]="user.status ? 'checked' : null" (change)="userStatus($event)">
+                          <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
+                        </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
